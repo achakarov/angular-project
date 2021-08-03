@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "my-blog-e2139": {
+      "hosting": {
+        "my-project": [
+          "my-blog-e2139"
+        ]
+      }
+    }
+  }
+}
