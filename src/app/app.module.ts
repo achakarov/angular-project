@@ -16,6 +16,7 @@ import { HomeComponent } from './components/home/home.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
