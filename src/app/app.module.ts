@@ -12,9 +12,18 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { DetailsPostComponent } from './components/details-post/details-post.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, HomeComponent, LoginComponent, RegisterComponent, EditPostComponent, DetailsPostComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent,
+    EditPostComponent,
+    DetailsPostComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -22,7 +31,7 @@ import { DetailsPostComponent } from './components/details-post/details-post.com
     AngularFirestoreModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
