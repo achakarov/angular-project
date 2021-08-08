@@ -2,13 +2,27 @@
   <div class="color">
     <div class="login-form">
       <h1>Login</h1>
-      <form action="/login" method="POST" id="form">
+      <form id="form" #form="ngForm" (ngSubmit)="login(form)">
         <label for="email">Email</label>
-        <input type="text" name="email" />
+        <input
+          type="text"
+          #emailInput="ngModel"
+          ngModel
+          name="email"
+          required
+          email
+        />
         <label for="password">Password</label>
-        <input type="password" name="password" />
+        <input
+          type="password"
+          #passwordInput="ngModel"
+          ngModel
+          name="password"
+          [minlength]="6"
+          required
+        />
         <button>Submit</button>
-        <a href="/register" class="option">Don't have an account?</a>
+        <a routerLink="/register" class="option">Don't have an account?</a>
       </form>
     </div>
   </div>

@@ -2,15 +2,37 @@
   <div class="color">
     <div class="register-form">
       <h1>Register</h1>
-      <form action="/register" method="POST" id="form">
+      <form id="form" #form="ngForm" (ngSubmit)="register(form)">
         <label for="email">Email</label>
-        <input type="text" name="email" />
+        <input
+          type="text"
+          #emailInput="ngModel"
+          ngModel
+          name="email"
+          required
+          email
+        />
         <label for="password">Password</label>
-        <input type="password" name="password" />
+        <input
+          type="password"
+          #passwordInput="ngModel"
+          ngModel
+          name="password"
+          [minlength]="6"
+          required
+        />
         <label for="repeat-password">Repeat Password</label>
-        <input type="password" name="repeatPassword" />
+        <input
+          type="password"
+          name="repeatPassword"
+          ngModel
+          #rePasswordInput="ngModel"
+          [minlength]="6"
+          required
+        />
         <button>Submit</button>
-        <a href="/login" class="option">Already have an account?</a>
+        <!-- (click)="onRegister(emailRegister.value, passwordRegister.value)" -->
+        <a routerLink="/login" class="option">Already have an account?</a>
       </form>
     </div>
   </div>
