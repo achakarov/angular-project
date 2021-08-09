@@ -9,13 +9,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  get isLogged(): boolean {
+  get isLogged(): string | null {
     return this.userService.isLogged;
   }
 
-  get email(): string {
-    return this.userService.user?.email || '';
-  }
   constructor(
     public firebaseAuth: AngularFireAuth,
     private userService: UserService,
@@ -26,7 +23,17 @@ export class HeaderComponent implements OnInit {
 
   handleLogout() {
     this.firebaseAuth.signOut();
+    localStorage.removeItem('user');
     console.log('Logged out!');
     this.router.navigate(['/']);
+  }
+
+  getEmail(): string {
+    if (localStorage.getItem('user')) {
+      const { email } = JSON.parse(localStorage.getItem('user')!);
+      return email;
+    } else {
+      return '';
+    }
   }
 }

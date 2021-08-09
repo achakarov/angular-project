@@ -1,7 +1,7 @@
 <header id="header">
   <h1>MyBlog</h1>
   <h2 *ngIf="isLogged">
-    Welcome <span>{{ email }}</span
+    Welcome <span>{{ getEmail() }}</span
     >!
   </h2>
   <h2 *ngIf="!isLogged">Welcome!</h2>

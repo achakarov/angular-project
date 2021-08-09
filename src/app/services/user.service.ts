@@ -9,8 +9,8 @@ import { IUser } from '../interfaces/user';
 export class UserService {
   user: IUser | null | undefined = undefined;
 
-  get isLogged(): boolean {
-    return !!this.user;
+  get isLogged(): string | null {
+    return localStorage.getItem('user');
   }
   constructor(private firebaseAuth: AngularFireAuth, private router: Router) {}
 
@@ -18,11 +18,13 @@ export class UserService {
     return this.firebaseAuth
       .signInWithEmailAndPassword(data.email, data.password)
       .then((result) => {
-        console.log(result);
-        // this.user.email = result.user?.email ;
-        // this.user!.uid = result.user?.uid;
-
-        this.user != result.user;
+        localStorage.setItem(
+          'user',
+          JSON.stringify({
+            uid: result.user?.uid,
+            email: result.user?.email,
+          })
+        );
 
         console.log('Auth Service: login: success');
         this.router.navigate(['/']);
