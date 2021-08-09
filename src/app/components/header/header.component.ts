@@ -13,5 +13,6 @@ export class HeaderComponent implements OnInit {
 
   handleLogout() {
     this.firebaseAuth.signOut();
+    console.log('Logged out!');
   }
 }
