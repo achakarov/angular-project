@@ -19,8 +19,10 @@ export class UserService {
       .signInWithEmailAndPassword(data.email, data.password)
       .then((result) => {
         console.log(result);
-        this.user!.email != result.user?.email;
-        this.user!.uid != result.user?.uid;
+        // this.user.email = result.user?.email ;
+        // this.user!.uid = result.user?.uid;
+
+        this.user != result.user;
 
         console.log('Auth Service: login: success');
         this.router.navigate(['/']);
