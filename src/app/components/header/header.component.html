@@ -1,15 +1,18 @@
 <header id="header">
   <h1>MyBlog</h1>
-  <h2>Welcome <span>userEmail</span>!</h2>
+  <h2 *ngIf="isLogged">
+    Welcome <span>{{ email }}</span
+    >!
+  </h2>
+  <h2 *ngIf="!isLogged">Welcome!</h2>
   <nav id="nav">
     <ul>
       <li><button routerLink="/">Home</button></li>
-      <!-- {{#if isLoggedIn}} -->
-      <li><button (click)="handleLogout()">Logout</button></li>
-      <!-- {{else}} -->
-      <li><button routerLink="/login">Login</button></li>
-      <li><button routerLink="/register">Register</button></li>
-      <!-- {{/if}} -->
+      <li *ngIf="isLogged"><button (click)="handleLogout()">Logout</button></li>
+      <ng-container *ngIf="!isLogged">
+        <li><button routerLink="/login">Login</button></li>
+        <li><button routerLink="/register">Register</button></li>
+      </ng-container>
     </ul>
   </nav>
 </header>
