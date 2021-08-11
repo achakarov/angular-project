@@ -32,7 +32,7 @@ export class PostService {
     });
   }
 
-  getAllPosts() {
+  getMyPosts() {
     return this.angularFirestore
       .collection('posts', (ref) => ref.where('author', '==', this.getUserId()))
       .snapshotChanges();

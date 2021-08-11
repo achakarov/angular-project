@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
   }
 
   getMyPosts(): any {
-    this.posts = this.postService.getAllPosts().pipe(
+    this.posts = this.postService.getMyPosts().pipe(
       map((actions) =>
         actions.map((a) => {
           const data = a.payload.doc.data() as IPost;
