@@ -24,18 +24,17 @@
     <h3>My Articles</h3>
     <hr />
     <div class="posts-row">
-      <!-- {{#each posts}} -->
       <!-- {{#if imTheCreator}} -->
-      <article class="post">
-        <h1>post title</h1>
-        <h2><span>post category</span></h2>
-        <p>post content</p>
-        <a href="/delete/id" id="delete-button">Delete</a>
-        <a href="/details/id" id="details-button">Details</a>
-        <a href="/edit/id" id="edit-button">Edit</a>
+      <article class="post" *ngFor="let post of posts | async">
+        <h1>{{ post.title }}</h1>
+        <h2>
+          <span>{{ post.category }}</span>
+        </h2>
+        <p>{{ post.content }}</p>
+        <a routerLink="/delete/{{ post.id }}" id="delete-button">Delete</a>
+        <a routerLink="/details/{{ post.id }}" id="details-button">Details</a>
+        <a routerLink="/edit/{{ post.id }}" id="edit-button">Edit</a>
       </article>
-      <!-- {{/if}} -->
-      <!-- {{/each}} -->
     </div>
   </section>
 </section>
@@ -43,8 +42,8 @@
   <section class="background-container">
     <h1>Welcome to MyBlog!</h1>
     <div class="auth-buttons">
-      <a href="/login">Login</a>
-      <a href="/register">Register</a>
+      <a routerLink="/login">Login</a>
+      <a routerLink="/register">Register</a>
     </div>
   </section>
 </section>

@@ -1,7 +1,11 @@
 export interface IPost {
-  // _id: string;
+  id?: string;
   author: string;
   title: string;
   category: string;
   content: string;
+}
+
+export interface IPostId extends IPost {
+  id: string;
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { IPost } from '../interfaces/post';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +22,9 @@ export class PostService {
           (error) => reject(error)
         );
     });
+  }
+
+  getAllPosts() {
+    return this.angularFirestore.collection('posts').snapshotChanges();
   }
 }
