@@ -21,11 +21,11 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'edit',
+    path: 'edit/:id',
     component: EditPostComponent,
   },
   {
-    path: 'details',
+    path: 'details/:id',
     component: DetailsPostComponent,
   },
 ];
