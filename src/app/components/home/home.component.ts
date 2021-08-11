@@ -64,4 +64,8 @@ export class HomeComponent implements OnInit {
     );
     console.log(this.posts);
   }
+
+  deletePost(post: any) {
+    this.postService.deletePost(post.id);
+  }
 }

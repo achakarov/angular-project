@@ -37,4 +37,8 @@ export class PostService {
       .collection('posts', (ref) => ref.where('author', '==', this.getUserId()))
       .snapshotChanges();
   }
+
+  deletePost(id: string) {
+    return this.angularFirestore.doc<IPost>(`posts/${id}`).delete();
+  }
 }

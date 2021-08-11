@@ -31,7 +31,12 @@
           <span>{{ post.category }}</span>
         </h2>
         <p>{{ post.content }}</p>
-        <a routerLink="/delete/{{ post.id }}" id="delete-button">Delete</a>
+        <a
+          routerLink="/delete/{{ post.id }}"
+          id="delete-button"
+          (click)="deletePost(post)"
+          >Delete</a
+        >
         <a routerLink="/details/{{ post.id }}" id="details-button">Details</a>
         <a routerLink="/edit/{{ post.id }}" id="edit-button">Edit</a>
       </article>
