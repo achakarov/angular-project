@@ -21,8 +21,17 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  getUserId(): string {
+    if (localStorage.getItem('user')) {
+      const { uid } = JSON.parse(localStorage.getItem('user')!);
+      return uid;
+    } else {
+      return '';
+    }
+  }
+
   createPost(form: NgForm): void {
-    const author = 'asd';
+    const author = this.getUserId();
     if (form.invalid) {
       return;
     }
