@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { IPost } from 'src/app/interfaces/post';
-import { map } from 'rxjs/operators';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
