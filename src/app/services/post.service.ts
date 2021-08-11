@@ -38,6 +38,10 @@ export class PostService {
       .snapshotChanges();
   }
 
+  getPost(id: string) {
+    return this.angularFirestore.doc(`posts/${id}`).valueChanges();
+  }
+
   deletePost(id: string) {
     return this.angularFirestore.doc<IPost>(`posts/${id}`).delete();
   }
