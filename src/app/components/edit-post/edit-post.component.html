@@ -1,18 +1,34 @@
-<section class="first-section">
+<section class="first-section" *ngIf="currentPost">
   <section class="background-container">
-    <form action="/edit" method="POST" class="edit-form">
+    <form #form="ngForm" (ngSubmit)="updatePost(form.value)" class="edit-form">
       <h1>Edit Post</h1>
       <label for="title">Title</label>
-      <input type="text" name="title" value="post.title" />
+      <input
+        type="text"
+        name="title"
+        [ngModel]="currentPost.title"
+        required
+        minlength="4"
+      />
       <label for="category">Category</label>
-      <input type="text" name="category" value="post.category" />
+      <input
+        type="text"
+        name="category"
+        [ngModel]="currentPost.category"
+        required
+        minlength="4"
+      />
       <label for="content">Content</label>
-      <textarea name="content" cols="30" rows="7">
-          post.content
-        </textarea
-      >
-      <button>Edit</button>
-      <a href="/" id="close-btn"
+      <textarea
+        name="content"
+        [ngModel]="currentPost.content"
+        required
+        minlength="10"
+        cols="30"
+        rows="7"
+      ></textarea>
+      <button type="submit">Edit</button>
+      <a routerLink="/" id="close-btn"
         ><img src="../../../assets/images/close.png"
       /></a>
     </form>

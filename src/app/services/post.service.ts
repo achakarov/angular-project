@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { NgForm } from '@angular/forms';
 import { IPost } from '../interfaces/post';
 
 @Injectable({
@@ -30,6 +31,10 @@ export class PostService {
           (error) => reject(error)
         );
     });
+  }
+
+  updatePost(data: any, id: string) {
+    return this.angularFirestore.doc<IPost>(`posts/${id}`).update(data);
   }
 
   getMyPosts() {
