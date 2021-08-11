@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { IPost } from '../interfaces/post';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostService {
   constructor(private angularFirestore: AngularFirestore) {}
+
+  getUserId(): string {
+    if (localStorage.getItem('user')) {
+      const { uid } = JSON.parse(localStorage.getItem('user')!);
+      return uid;
+    } else {
+      return '';
+    }
+  }
 
   createPost(post: IPost, author: string) {
     const newPost = { ...post, author };
@@ -25,6 +33,8 @@ export class PostService {
   }
 
   getAllPosts() {
-    return this.angularFirestore.collection('posts').snapshotChanges();
+    return this.angularFirestore
+      .collection('posts', (ref) => ref.where('author', '==', this.getUserId()))
+      .snapshotChanges();
   }
 }
