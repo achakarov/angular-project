@@ -21,13 +21,22 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login(form: NgForm): void {
+    const { email, password } = form.value;
     if (form.invalid) {
-      this.notifier.notify('error', 'Incorrect email or password!');
       form.reset();
+      this.notifier.notify(
+        'error',
+        'Please provide a valid email and password at least 6 characters long'
+      );
       return;
     }
-    const { email, password } = form.value;
-    this.userService.login({ email, password });
-    this.notifier.notify('success', 'Successful login');
+    this.userService
+      .login({ email, password })
+      .then(() => {
+        this.notifier.notify('success', 'Successful login');
+      })
+      .catch(() =>
+        this.notifier.notify('error', 'Incorrect username or password')
+      );
   }
 }

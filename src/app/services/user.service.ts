@@ -25,16 +25,7 @@ export class UserService {
             email: result.user?.email,
           })
         );
-
-        console.log('Auth Service: login: success');
         this.router.navigate(['/']);
-      })
-      .catch((error) => {
-        console.log('Auth Service: login error...');
-        console.log('error code', error.code);
-        console.log('error', error);
-        if (error.code) return { isValid: false, message: error.message };
-        else return;
       });
   }
 

@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit {
   handleLogout() {
     this.firebaseAuth.signOut();
     localStorage.removeItem('user');
-    console.log('Logged out!');
     this.router.navigate(['/']);
   }
 
