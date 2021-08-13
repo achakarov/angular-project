@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-// import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-register',
@@ -9,21 +9,25 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  private notifier: NotifierService;
   constructor(
-    private userService: UserService // private router: Router
-  ) {}
+    private userService: UserService,
+    notifierService: NotifierService
+  ) {
+    this.notifier = notifierService;
+  }
   ngOnInit(): void {}
 
   register(form: NgForm): void {
     if (form.invalid) {
       return;
     }
-    const { email, password } = form.value;
+    const { email, password, repeatPassword } = form.value;
+    if (password !== repeatPassword) {
+      this.notifier.notify('error', 'Passwords must match!');
+      return;
+    }
     this.userService.register({ email, password });
+    this.notifier.notify('success', 'Successful registration');
   }
-
-  // ngOnDestroy(): void {
-  //   this.killSubscription.next();
-  //   this.killSubscription.complete();
-  // }
 }

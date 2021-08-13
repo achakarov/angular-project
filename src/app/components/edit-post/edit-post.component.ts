@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-edit-post',
@@ -10,12 +10,15 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class EditPostComponent implements OnInit {
   currentPost: any;
+  private notifier: NotifierService;
   constructor(
     private postService: PostService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    notifierService: NotifierService
   ) {
     this.getPost();
+    this.notifier = notifierService;
   }
 
   ngOnInit(): void {}
@@ -27,12 +30,32 @@ export class EditPostComponent implements OnInit {
 
   updatePost(data: any): void {
     const id = this.activatedRoute.snapshot.params.id;
+
+    const { title, category, content } = data;
+    if (title === '' || category === '' || content === '') {
+      this.notifier.notify('error', 'Please fill in all fields');
+      return;
+    }
+
+    if (title.length < 4 || category.length < 4) {
+      this.notifier.notify(
+        'error',
+        'Title and Category must be at least 4 characters.'
+      );
+      return;
+    }
+
+    if (content.length < 10) {
+      this.notifier.notify('error', 'Content must be at least 10 characters.');
+      return;
+    }
+
     this.postService
       .updatePost(data, id)
       .then(() => {
-        console.log('The post was updated successfully!');
+        this.notifier.notify('success', 'The post was updated successfully!');
         this.router.navigate(['/']);
       })
-      .catch((err: any) => console.log(err));
+      .catch((err: any) => this.notifier.notify('error', err));
   }
 }

@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { IPost, IPostId } from 'src/app/interfaces/post';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-home',
@@ -13,21 +14,21 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  private notifier: NotifierService;
   get isLogged(): string | null {
     return this.userService.isLogged;
   }
 
-  // private postCollection: AngularFirestoreCollection<IPost>;
   posts!: Observable<IPostId[]>;
-
-  // public posts: any;
 
   constructor(
     private userService: UserService,
     private router: Router,
-    private postService: PostService
+    private postService: PostService,
+    notifierService: NotifierService
   ) {
     this.getMyPosts();
+    this.notifier = notifierService;
   }
 
   ngOnInit(): void {}
@@ -43,6 +44,25 @@ export class HomeComponent implements OnInit {
 
   createPost(form: NgForm): void {
     const author = this.getUserId();
+    const { title, category, content } = form.value;
+    if (title === '' || category === '' || content === '') {
+      this.notifier.notify('error', 'Please fill in all fields');
+      return;
+    }
+
+    if (title.length < 4 || category.length < 4) {
+      this.notifier.notify(
+        'error',
+        'Title and Category must be at least 4 characters.'
+      );
+      return;
+    }
+
+    if (content.length < 10) {
+      this.notifier.notify('error', 'Content must be at least 10 characters.');
+      return;
+    }
+
     if (form.invalid) {
       return;
     }
@@ -61,7 +81,6 @@ export class HomeComponent implements OnInit {
         })
       )
     );
-    console.log(this.posts);
   }
 
   deletePost(post: any) {
