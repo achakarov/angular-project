@@ -20,6 +20,10 @@ export class RegisterComponent implements OnInit {
 
   register(form: NgForm): void {
     if (form.invalid) {
+      this.notifier.notify(
+        'error',
+        'Please provide a valid email and password at least 6 characters long'
+      );
       return;
     }
     const { email, password, repeatPassword } = form.value;

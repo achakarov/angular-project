@@ -32,14 +32,11 @@ export class UserService {
   register(data: { email: string; password: string }) {
     return this.firebaseAuth
       .createUserWithEmailAndPassword(data.email, data.password)
-      .then((result) => {
-        console.log(result);
+      .then(() => {
         this.router.navigate(['/login']);
       })
       .catch((error) => {
         console.log('Auth Service: signup error', error);
-        if (error.code) return { isValid: false, message: error.message };
-        else return;
       });
   }
 }
