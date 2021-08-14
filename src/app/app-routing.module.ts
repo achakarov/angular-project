@@ -4,7 +4,9 @@ import { DetailsPostComponent } from './components/details-post/details-post.com
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
@@ -23,10 +25,16 @@ const routes: Routes = [
   {
     path: 'edit/:id',
     component: EditPostComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'details/:id',
     component: DetailsPostComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
 
