@@ -1,6 +1,6 @@
 # MyBlog
 
-The project shows a blog app created with Angular & Firebase/Firestore.
+The project shows a blog app created with Angular & Firebase/Firestore as part of the final exam for the Angular course in SoftUni.
 
 ## Functionality for guest users
 
