@@ -33,6 +33,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'delete/:id',
+    redirectTo: '/',
+  },
+  {
     path: '**',
     component: NotFoundComponent,
   },
