@@ -2,11 +2,11 @@
 
 The project shows a blog app created with Angular & Firebase/Firestore.
 
-# Functionality for guest users
+## Functionality for guest users
 
 Guest users can login and register in the app.
 
-# Functionality for registered users
+## Functionality for registered users
 
 Registered users can login/logout, see all their own blog articles from the Database, see the details of the article, create a new one, edit or delete it.
 
