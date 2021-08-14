@@ -16,6 +16,7 @@ import { DetailsPostComponent } from './components/details-post/details-post.com
 import { UserService } from './services/user.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -67,6 +68,7 @@ const customNotifierOptions: NotifierOptions = {
     RegisterComponent,
     EditPostComponent,
     DetailsPostComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
